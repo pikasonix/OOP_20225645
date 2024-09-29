@@ -1,0 +1,28 @@
+6.1
+- What happens if users choose “Cancel”?
+Khi chọn "Cancel" thì chương trình không được biên dịch thành file class dẫn đến huỷ bỏ chạy chương trình, đồng thời tùy chọn "Always save resources before launching" cũng không được lưu.
+
+- How to customize the options to users, e.g. only two options: “Yes” and “No”, OR “I do” and “I don’t”
+    + Để customize option chỉ có Yes và No ta chọn YES_NO_OPTION thay vì default là YES_NO_CANCEL_OPTION và title là "Select an Option"
+
+    import javax.swing.JOptionPane;
+    public class Test {
+        public static void main(String[] args) {
+            int option = JOptionPane.showConfirmDialog(null,"Do you want to change to the first class ticket?", "Select an Option", JOptionPane.YES_NO_OPTION);
+            JOptionPane.showMessageDialog(null, "You've chosen: " + (option == JOptionPane.YES_OPTION ? "Yes" : "No"));
+            System.exit(0);
+        }
+    }
+
+    + Để customize các option thay vì chỉ có DEFAULT_OPTION, YES_NO_OPTION, YES_NO_CANCEL_OPTION, OK_CANCEL_OPTION của showConfirmDialog thì ta có thể dùng showOptionDialog.
+    Ví dụ thay thế đoạn code showConfirmDialog đã cho bằng showOptionDialog:
+        
+    import javax.swing.JOptionPane;
+    public class Test {
+        public static void main(String[] args) {
+            Object[] options = {"I do", "I don't"};
+            int option = JOptionPane.showOptionDialog(null, "Do you want to change to the first class ticket?", "Select an Option", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            JOptionPane.showMessageDialog(null, "You've chosen: " + (option == 0 ? "I do" : "I don't"));
+            System.exit(0);
+        }
+    }
